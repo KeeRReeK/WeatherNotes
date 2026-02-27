@@ -16,7 +16,7 @@ struct CreateItemView: View {
         RoundedRectangle(cornerRadius: 25)
             .frame(
                 width: UIScreen.main.bounds.width * 0.9,
-                height: UIScreen.main.bounds.height * 0.19
+                height: UIScreen.main.bounds.height * 0.20
             )
             .foregroundStyle(.softLime)
             .shadow(radius: 3, x: 3, y: 3)
@@ -32,7 +32,7 @@ struct CreateItemView: View {
                     Button {
                         isPresented = false
                     } label: {
-                        Text("OK")
+                        Text("SAVE")
                             .patuaOne(40)
                             .foregroundStyle(.background)
                     }
