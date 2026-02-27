@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct NoteItemView: View {
+    
     var body: some View {
         RoundedRectangle(cornerRadius: 25)
             .frame(
