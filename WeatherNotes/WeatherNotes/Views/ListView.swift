@@ -104,6 +104,16 @@ struct ListView: View {
                                 }
                             }
                             .padding()
+                            
+                            ScrollView(showsIndicators: false) {
+                                VStack {
+                                    ForEach(1..<15) { i in
+                                        NoteItemView()
+                                    }
+                                }
+                                .padding()
+                            }
+                            
                             Spacer()
                         }
                     }
