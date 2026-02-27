@@ -9,9 +9,13 @@ import SwiftUI
 
 @main
 struct WeatherNotesApp: App {
+    
+    @AppStorage("isDarkMode") private var isDarkMode = false
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ListView()
+                .preferredColorScheme(isDarkMode ? .dark : .light)
         }
     }
 }
