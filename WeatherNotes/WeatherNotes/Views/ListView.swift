@@ -17,7 +17,8 @@ struct Star: Hashable {
 struct ListView: View {
     
     @AppStorage("isDarkMode") private var isDarkMode = false
-    @State private var isPresented: Bool = false
+    @State private var isPresentedCreate: Bool = false
+    @State private var isPresentedInfo: Bool = false
     
     @State private var stars: [Star] = (0..<150).map { _ in
         Star(
@@ -91,7 +92,7 @@ struct ListView: View {
                                     .patuaOne(35)
                                 Spacer()
                                 Button {
-                                    isPresented = true
+                                    isPresentedCreate = true
                                 } label: {
                                     Image(systemName: "plus")
                                         .font(.system(size: 25))
@@ -111,6 +112,9 @@ struct ListView: View {
                                 VStack {
                                     ForEach(1..<15) { i in
                                         NoteItemView()
+                                            .onTapGesture {
+                                                isPresentedInfo = true
+                                            }
                                     }
                                 }
                                 .padding()
@@ -122,14 +126,24 @@ struct ListView: View {
             }
             .ignoresSafeArea()
             
-            if isPresented {
+            if isPresentedCreate {
                 Color.black.opacity(0.8)
                     .ignoresSafeArea()
                     .onTapGesture {
-                        isPresented = false
+                        isPresentedCreate = false
                     }
                 
-                CreateItemView(isPresented: $isPresented)
+                CreateItemView(isPresented: $isPresentedCreate)
+            }
+            
+            if isPresentedInfo {
+                Color.black.opacity(0.8)
+                    .ignoresSafeArea()
+                    .onTapGesture {
+                        isPresentedInfo = false
+                    }
+                
+                ItemInfoView(isPresented: $isPresentedInfo)
             }
         }
     }
