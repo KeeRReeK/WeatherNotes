@@ -17,6 +17,7 @@ struct Star: Hashable {
 struct ListView: View {
     
     @AppStorage("isDarkMode") private var isDarkMode = false
+    @State private var isPresented: Bool = false
     
     @State private var stars: [Star] = (0..<150).map { _ in
         Star(
@@ -29,7 +30,8 @@ struct ListView: View {
     
     var body: some View {
         ZStack {
-            Color.aquaMint.ignoresSafeArea()
+            Color.aquaMint
+                .ignoresSafeArea()
             
             ForEach(0..<150, id: \.self) { _ in
                 Circle()
@@ -89,7 +91,7 @@ struct ListView: View {
                                     .patuaOne(35)
                                 Spacer()
                                 Button {
-                                    
+                                    isPresented = true
                                 } label: {
                                     Image(systemName: "plus")
                                         .font(.system(size: 25))
@@ -119,8 +121,17 @@ struct ListView: View {
                     }
             }
             .ignoresSafeArea()
+            
+            if isPresented {
+                Color.black.opacity(0.8)
+                    .ignoresSafeArea()
+                    .onTapGesture {
+                        isPresented = false
+                    }
+                
+                CreateItemView(isPresented: $isPresented)
+            }
         }
-        
     }
 }
 
