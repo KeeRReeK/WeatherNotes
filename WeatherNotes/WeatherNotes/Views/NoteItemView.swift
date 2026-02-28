@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct NoteItemView: View {
+    let note: NoteEntity
     
     var body: some View {
         RoundedRectangle(cornerRadius: 25)
@@ -19,26 +20,47 @@ struct NoteItemView: View {
             .overlay {
                 HStack {
                     VStack(alignment: .leading) {
-                        Text("Text notion")
+                        Text(note.title ?? "Unknown")
                             .patuaOne(30)
                             .lineLimit(1)
-                        Text("20 December, 15:25")
+                        
+                        Text(note.date?.formatted(date: .abbreviated, time: .shortened) ?? "")
+                            .font(.subheadline)
                     }
                     Spacer()
                     
                     VStack {
-                        Image(systemName: "sun.dust")
-                            .font(.system(size: 35))
+                        if let iconCode = note.weatherIcon, !iconCode.isEmpty,
+                           let url = URL(string: "https://openweathermap.org/img/wn/\(iconCode)@2x.png") {
+                            
+                            AsyncImage(url: url) { phase in
+                                switch phase {
+                                case .empty:
+                                    ProgressView()
+                                        .frame(width: 40, height: 40)
+                                case .success(let image):
+                                    image
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(width: 50, height: 50)
+                                case .failure:
+                                    Image(systemName: "cloud.fill")
+                                        .font(.system(size: 35))
+                                        .foregroundColor(.gray)
+                                @unknown default:
+                                    EmptyView()
+                                }
+                            }
+                        } else {
+                            Image(systemName: "sun.dust")
+                                .font(.system(size: 35))
+                        }
                         
-                        Text("20ºC")
+                        Text("\(Int(note.temperature))ºC")
                     }
                 }
                 .padding()
             }
             .shadow(radius: 3, x: 3, y: 3)
     }
-}
-
-#Preview {
-    NoteItemView()
 }
