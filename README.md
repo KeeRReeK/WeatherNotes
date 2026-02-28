@@ -7,7 +7,7 @@
 * **Dark Mode Support:** Custom color palettes implemented via Asset Catalogs for seamless Light/Dark mode transitions.
 
 ## Screenshots
-| Light Theme | Dark Theme | Add Note |
+| Light Theme | Dark Theme | Info Note |
 |:---:|:---:|:---:|
 | <img src="Screenshots/link_to_screenshot_1.png" width="250"> | <img src="Screenshots/link_to_screenshot_2.png" width="250"> | <img src="Screenshots/link_to_screenshot_3.png" width="250"> |
 
