@@ -9,6 +9,7 @@ import SwiftUI
 
 struct CreateItemView: View {
     
+    @EnvironmentObject var viewModel: NotesViewModel
     @State private var text: String = ""
     @Binding var isPresented: Bool
     
@@ -30,17 +31,24 @@ struct CreateItemView: View {
                     Spacer()
                     
                     Button {
-                        isPresented = false
+                        Task {
+                            await viewModel.saveNote(title: text)
+                            isPresented = false
+                        }
                     } label: {
-                        Text("SAVE")
-                            .patuaOne(40)
-                            .foregroundStyle(.background)
+                        if viewModel.isLoading {
+                            ProgressView()
+                        } else {
+                            Text("SAVE")
+                                .patuaOne(40)
+                        }
                     }
                     .padding(.horizontal, 40)
                     .background {
                         Color.lavenderPink
                     }
                     .cornerRadius(15)
+                    .disabled(text.isEmpty || viewModel.isLoading)
                 }
                 .padding()
             }

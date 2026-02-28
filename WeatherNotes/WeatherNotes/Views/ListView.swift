@@ -17,8 +17,11 @@ struct Star: Hashable {
 struct ListView: View {
     
     @AppStorage("isDarkMode") private var isDarkMode = false
+    
+    @EnvironmentObject var viewModel: NotesViewModel
+    
     @State private var isPresentedCreate: Bool = false
-    @State private var isPresentedInfo: Bool = false
+    @State private var selectedNote: NoteEntity? = nil
     
     @State private var stars: [Star] = (0..<150).map { _ in
         Star(
@@ -110,10 +113,10 @@ struct ListView: View {
                             
                             ScrollView(showsIndicators: false) {
                                 VStack {
-                                    ForEach(1..<15) { i in
-                                        NoteItemView()
+                                    ForEach(viewModel.notes, id: \.id) { note in
+                                        NoteItemView(note: note)
                                             .onTapGesture {
-                                                isPresentedInfo = true
+                                                selectedNote = note
                                             }
                                     }
                                 }
@@ -136,15 +139,24 @@ struct ListView: View {
                 CreateItemView(isPresented: $isPresentedCreate)
             }
             
-            if isPresentedInfo {
+            if let note = selectedNote {
                 Color.black.opacity(0.8)
                     .ignoresSafeArea()
                     .onTapGesture {
-                        isPresentedInfo = false
+                        selectedNote = nil
                     }
                 
-                ItemInfoView(isPresented: $isPresentedInfo)
+                ItemInfoView(
+                    note: note,
+                    isPresented: Binding(
+                        get: { selectedNote != nil },
+                        set: { if !$0 { selectedNote = nil } }
+                    )
+                )
             }
+        }
+        .onAppear {
+            viewModel.locationManager.requestLocation()
         }
     }
 }
