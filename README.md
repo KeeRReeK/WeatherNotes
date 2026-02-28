@@ -12,7 +12,7 @@
 | <img src="Screenshots/link_to_screenshot_1" width="250"> | <img src="Screenshots/link_to_screenshot_2" width="250"> | <img src="Screenshots/link_to_screenshot_3" width="250"> |
 
 ## How to Run
-1. Clone the repository: `git clone https://github.com/[Твій_Логін]/WeatherNotes.git`
+1. Clone the repository: `git clone [https://github.com/KeeRReeK/WeatherNotes]`
 2. Open `WeatherNotes.xcodeproj` in Xcode 15+.
 3. In `WeatherService.swift`, replace `API_KEY` with your valid OpenWeather API key.
 4. Run the project on a simulator or real device.
