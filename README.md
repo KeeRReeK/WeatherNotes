@@ -9,7 +9,7 @@
 ## Screenshots
 | Light Theme | Dark Theme | Add Note |
 |:---:|:---:|:---:|
-| <img src="Screenshots/link_to_screenshot_1" width="250"> | <img src="Screenshots/link_to_screenshot_2" width="250"> | <img src="Screenshots/link_to_screenshot_3" width="250"> |
+| <img src="Screenshots/link_to_screenshot_1.png" width="250"> | <img src="Screenshots/link_to_screenshot_2.png" width="250"> | <img src="Screenshots/link_to_screenshot_3.png" width="250"> |
 
 ## How to Run
 1. Clone the repository: `git clone [https://github.com/KeeRReeK/WeatherNotes]`
